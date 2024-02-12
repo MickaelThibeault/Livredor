@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240208135800 extends AbstractMigration
+final class Version20240212133702 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,14 +20,14 @@ final class Version20240208135800 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE comment CHANGE conference_id conference_id INT NOT NULL');
+        $this->addSql('CREATE TABLE `admin` (id INT AUTO_INCREMENT NOT NULL, username VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_880E0D76F85E0677 (username), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4');
         $this->addSql('ALTER TABLE comment ADD CONSTRAINT FK_9474526C604B8382 FOREIGN KEY (conference_id) REFERENCES conference (id)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('DROP TABLE `admin`');
         $this->addSql('ALTER TABLE comment DROP FOREIGN KEY FK_9474526C604B8382');
-        $this->addSql('ALTER TABLE comment CHANGE conference_id conference_id INT DEFAULT NULL');
     }
 }

@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -33,6 +34,13 @@ class ConferenceCrudController extends AbstractCrudController
         return $actions
             ->add(Crud::PAGE_EDIT, $duplicate)
             ->reorder(Crud::PAGE_EDIT, [self::ACTION_DUPLICATE, Action::SAVE_AND_RETURN]);
+    }
+
+    public function configureFields(string $pageName): iterable
+    {
+        yield TextField::new('city');
+        yield TextField::new('year');
+        yield BooleanField::new('isInternational');
     }
 
     /*
